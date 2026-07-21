@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/user_entity.dart';
+import '../../widgets/profile/profile_info_widgets.dart';
 import '../../widgets/swipe/profile_detail_data.dart';
 import '../../widgets/swipe/profile_mock_data.dart';
 
@@ -65,62 +66,55 @@ class UserDetailScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text('${user.location} · ${match.distanceKm} km away', style: Theme.of(context).textTheme.bodyMedium),
                   const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      _Badge(label: '${match.matchPercent}% Match', color: const Color(0xFF5FA8FF)),
-                      _Badge(label: '${match.trustPercent}% Trust', color: const Color(0xFF37C46B)),
-                      _Badge(label: match.replyLabel, color: const Color(0xFFE6A93A)),
-                    ],
-                  ),
+                  MatchBadgeRow(match: match),
                   const SizedBox(height: 24),
 
-                  _sectionLabel('ABOUT'),
+                  sectionLabel('ABOUT'),
                   const SizedBox(height: 8),
-                  _withPin(_TextCard(text: detail.about)),
+                  withPin(AboutCard(text: detail.about)),
                   const SizedBox(height: 24),
 
-                  _sectionLabel('THE BASICS'),
+                  sectionLabel('THE BASICS'),
                   const SizedBox(height: 8),
-                  _InfoBox(rows: [
-                    _InfoRow(icon: Icons.cake_outlined, label: 'Age', value: '${user.age} years old'),
-                    _InfoRow(icon: Icons.straighten_rounded, label: 'Height', value: detail.heightLabel),
-                    _InfoRow(icon: Icons.location_on_outlined, label: 'Lives in', value: user.city, subvalue: user.country),
-                    _InfoRow(icon: Icons.favorite_outline_rounded, label: 'Love language', value: detail.loveLanguage),
-                    _InfoRow(icon: Icons.self_improvement_rounded, label: 'Religion', value: detail.religion),
-                    _InfoRow(icon: Icons.wc_rounded, label: 'Interested in', value: detail.interestedIn),
-                    _InfoRow(icon: Icons.auto_awesome_rounded, label: 'Zodiac', value: detail.zodiacSign, subvalue: detail.zodiacTraits),
-                    _InfoRow(icon: Icons.translate_rounded, label: 'Mother tongue', value: detail.motherTongue),
-                    _InfoRow(icon: Icons.chat_bubble_outline_rounded, label: 'Communication style', value: detail.communicationStyle, last: true),
+                  ProfileInfoBox(rows: [
+                    ProfileInfoRow(icon: Icons.cake_outlined, label: 'Age', value: '${user.age} years old'),
+                    ProfileInfoRow(icon: Icons.straighten_rounded, label: 'Height', value: detail.heightLabel),
+                    ProfileInfoRow(icon: Icons.location_on_outlined, label: 'Lives in', value: user.city, subvalue: user.country),
+                    ProfileInfoRow(icon: Icons.favorite_outline_rounded, label: 'Love language', value: detail.loveLanguage),
+                    ProfileInfoRow(icon: Icons.self_improvement_rounded, label: 'Religion', value: detail.religion),
+                    ProfileInfoRow(icon: Icons.wc_rounded, label: 'Interested in', value: detail.interestedIn),
+                    ProfileInfoRow(icon: Icons.auto_awesome_rounded, label: 'Zodiac', value: detail.zodiacSign, subvalue: detail.zodiacTraits),
+                    ProfileInfoRow(icon: Icons.translate_rounded, label: 'Mother tongue', value: detail.motherTongue),
+                    ProfileInfoRow(icon: Icons.chat_bubble_outline_rounded, label: 'Communication style', value: detail.communicationStyle, last: true),
                   ]),
                   const SizedBox(height: 16),
 
-                  _withPin(_VideoIntroCard(imageUrl: user.largePhotoUrl, duration: detail.videoIntroDuration)),
+                  withPin(_VideoIntroCard(imageUrl: user.largePhotoUrl, duration: detail.videoIntroDuration)),
                   const SizedBox(height: 16),
 
-                  _withPin(_PromptCard(label: 'THE WAY TO WIN ME OVER IS…', text: detail.winMeOverPrompt)),
+                  withPin(_PromptCard(label: 'THE WAY TO WIN ME OVER IS…', text: detail.winMeOverPrompt)),
                   const SizedBox(height: 24),
 
-                  _sectionLabel('CAREER & AMBITION'),
+                  sectionLabel('CAREER & AMBITION'),
                   const SizedBox(height: 8),
-                  _InfoBox(rows: [
-                    _InfoRow(icon: Icons.school_outlined, label: 'Education', value: detail.educationInstitute, subvalue: detail.educationDegree),
-                    _InfoRow(icon: Icons.work_outline_rounded, label: 'Work as', value: match.occupation, subvalue: detail.employmentLine),
-                    _InfoRow(icon: Icons.auto_fix_high_rounded, label: 'Work style', value: detail.workStyle),
-                    _InfoRow(icon: Icons.trending_up_rounded, label: 'Ambition level', value: detail.ambitionLevel, last: true),
+                  ProfileInfoBox(rows: [
+                    ProfileInfoRow(icon: Icons.school_outlined, label: 'Education', value: detail.educationInstitute, subvalue: detail.educationDegree),
+                    ProfileInfoRow(icon: Icons.work_outline_rounded, label: 'Work as', value: match.occupation, subvalue: detail.employmentLine),
+                    ProfileInfoRow(icon: Icons.auto_fix_high_rounded, label: 'Work style', value: detail.workStyle),
+                    ProfileInfoRow(icon: Icons.trending_up_rounded, label: 'Ambition level', value: detail.ambitionLevel, last: true),
                   ]),
                   const SizedBox(height: 16),
 
-                  _withPin(_PromptCard(label: 'BIG DREAM', text: detail.bigDream)),
+                  withPin(_PromptCard(label: 'BIG DREAM', text: detail.bigDream)),
                   const SizedBox(height: 16),
 
-                  _withPin(_PhotoTile(imageUrl: user.largePhotoUrl)),
+                  withPin(_PhotoTile(imageUrl: user.largePhotoUrl)),
                   const SizedBox(height: 16),
 
-                  _withPin(_PromptCard(label: 'MY SIMPLE PLEASURES…', text: detail.simplePleasures)),
+                  withPin(_PromptCard(label: 'MY SIMPLE PLEASURES…', text: detail.simplePleasures)),
                   const SizedBox(height: 24),
 
-                  _sectionLabel('INTERESTS & HOBBIES'),
+                  sectionLabel('INTERESTS & HOBBIES'),
                   const SizedBox(height: 12),
                   Wrap(
                     spacing: 10,
@@ -129,22 +123,22 @@ class UserDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
-                  _sectionLabel('LIFESTYLE'),
+                  sectionLabel('LIFESTYLE'),
                   const SizedBox(height: 8),
-                  _InfoBox(rows: [
-                    _InfoRow(icon: Icons.restaurant_menu_rounded, label: 'Diet', value: detail.diet),
-                    _InfoRow(icon: Icons.wine_bar_outlined, label: 'Drinking', value: detail.drinking),
-                    _InfoRow(icon: Icons.nightlight_round, label: 'Sleep', value: detail.sleepStyle, last: true),
+                  ProfileInfoBox(rows: [
+                    ProfileInfoRow(icon: Icons.restaurant_menu_rounded, label: 'Diet', value: detail.diet),
+                    ProfileInfoRow(icon: Icons.wine_bar_outlined, label: 'Drinking', value: detail.drinking),
+                    ProfileInfoRow(icon: Icons.nightlight_round, label: 'Sleep', value: detail.sleepStyle, last: true),
                   ]),
                   const SizedBox(height: 24),
 
                   _DatingGoalCard(title: detail.datingGoalTitle, description: detail.datingGoalDescription),
                   const SizedBox(height: 16),
 
-                  _withPin(_PhotoTile(imageUrl: user.largePhotoUrl)),
+                  withPin(_PhotoTile(imageUrl: user.largePhotoUrl)),
                   const SizedBox(height: 16),
 
-                  _withPin(_PromptCard(label: 'WE\'LL GET ALONG IF…', text: detail.getAlongIfPrompt)),
+                  withPin(_PromptCard(label: 'WE\'LL GET ALONG IF…', text: detail.getAlongIfPrompt)),
                   const SizedBox(height: 100),
                 ],
               ),
@@ -196,80 +190,6 @@ class UserDetailScreen extends StatelessWidget {
         radius: 26,
         backgroundColor: Colors.white,
         child: Icon(icon, color: color),
-      ),
-    );
-  }
-}
-
-Widget _sectionLabel(String text) {
-  return Text(
-    text,
-    style: const TextStyle(color: AppColors.coral, fontWeight: FontWeight.w700, fontSize: 12, letterSpacing: 0.4),
-  );
-}
-
-/// Pins a small decorative marker to the bottom-right corner of a card,
-/// hanging half off its edge — matches the reference design's "pinned"
-/// treatment on photos, prompts, and text cards.
-Widget _withPin(Widget card) {
-  return Stack(
-    clipBehavior: Clip.none,
-    children: [
-      card,
-      Positioned(
-        right: 14,
-        bottom: -12,
-        child: Container(
-          width: 28,
-          height: 28,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.15), blurRadius: 6, offset: const Offset(0, 2))],
-          ),
-          child: const Icon(Icons.push_pin_rounded, size: 14, color: AppColors.coral),
-        ),
-      ),
-    ],
-  );
-}
-
-class _Badge extends StatelessWidget {
-  const _Badge({required this.label, required this.color});
-  final String label;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(14)),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(width: 7, height: 7, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
-          const SizedBox(width: 6),
-          Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
-  }
-}
-
-/// Plain paragraph in a rounded card — used for ABOUT.
-class _TextCard extends StatelessWidget {
-  const _TextCard({required this.text});
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(AppTheme.radiusM)),
-      child: Text(
-        text,
-        style: const TextStyle(color: AppColors.textPrimary, fontSize: 14, height: 1.5),
       ),
     );
   }
@@ -444,52 +364,3 @@ class _DatingGoalCard extends StatelessWidget {
   }
 }
 
-class _InfoRow {
-  const _InfoRow({required this.icon, required this.label, required this.value, this.subvalue, this.last = false});
-  final IconData icon;
-  final String label;
-  final String value;
-  final String? subvalue;
-  final bool last;
-}
-
-class _InfoBox extends StatelessWidget {
-  const _InfoBox({required this.rows});
-  final List<_InfoRow> rows;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(color: AppColors.surface, borderRadius: BorderRadius.circular(AppTheme.radiusM)),
-      child: Column(children: [for (final row in rows) _buildRow(row)]),
-    );
-  }
-
-  Widget _buildRow(_InfoRow row) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(
-        border: row.last ? null : const Border(bottom: BorderSide(color: AppColors.divider)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(row.icon, size: 18, color: AppColors.coral),
-          const SizedBox(width: 12),
-          Expanded(child: Text(row.label, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13))),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(row.value, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-              if (row.subvalue != null) ...[
-                const SizedBox(height: 2),
-                Text(row.subvalue!, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
-              ],
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}

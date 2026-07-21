@@ -8,6 +8,9 @@ import '../../bloc/home/home_bloc.dart';
 import '../../widgets/app_error_view.dart';
 import '../../widgets/home_loading_skeleton.dart';
 import '../../widgets/home_top_bar.dart';
+import '../../widgets/profile/profile_info_widgets.dart';
+import '../../widgets/swipe/profile_detail_data.dart';
+import '../../widgets/swipe/profile_mock_data.dart';
 import '../../widgets/swipe/swipe_card_deck.dart';
 import '../profile/user_detail_screen.dart';
 
@@ -44,6 +47,11 @@ class HomeScreen extends StatelessWidget {
                       child: _SwipeDeckSection(users: state.users),
                     ),
                   ),
+                  if (state.users.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
+                      child: _ProfileHighlightSection(user: state.users.first),
+                    ),
                 ],
               ),
             );
@@ -155,6 +163,47 @@ class _EmptyDeckCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Badges + ABOUT + THE BASICS preview for the top card in the deck,
+/// shown below the swipe deck so key details are visible without a tap.
+class _ProfileHighlightSection extends StatelessWidget {
+  const _ProfileHighlightSection({required this.user});
+
+  final UserEntity user;
+
+  @override
+  Widget build(BuildContext context) {
+    final match = ProfileMockData.forUser(user);
+    final detail = ProfileDetailData.forUser(user);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MatchBadgeRow(match: match),
+        const SizedBox(height: 20),
+        sectionLabel('ABOUT'),
+        const SizedBox(height: 8),
+        withPin(AboutCard(text: detail.about)),
+        const SizedBox(height: 24),
+        sectionLabel('THE BASICS'),
+        const SizedBox(height: 8),
+        ProfileInfoBox(
+          rows: [
+            ProfileInfoRow(icon: Icons.cake_outlined, label: 'Age', value: '${user.age} years old'),
+            ProfileInfoRow(icon: Icons.straighten_rounded, label: 'Height', value: detail.heightLabel),
+            ProfileInfoRow(icon: Icons.location_on_outlined, label: 'Lives in', value: user.city, subvalue: user.country),
+            ProfileInfoRow(icon: Icons.favorite_outline_rounded, label: 'Love language', value: detail.loveLanguage),
+            ProfileInfoRow(icon: Icons.self_improvement_rounded, label: 'Religion', value: detail.religion),
+            ProfileInfoRow(icon: Icons.wc_rounded, label: 'Interested in', value: detail.interestedIn),
+            ProfileInfoRow(icon: Icons.auto_awesome_rounded, label: 'Zodiac', value: detail.zodiacSign, subvalue: detail.zodiacTraits),
+            ProfileInfoRow(icon: Icons.translate_rounded, label: 'Mother tongue', value: detail.motherTongue),
+            ProfileInfoRow(icon: Icons.chat_bubble_outline_rounded, label: 'Communication style', value: detail.communicationStyle, last: true),
+          ],
+        ),
+      ],
     );
   }
 }
