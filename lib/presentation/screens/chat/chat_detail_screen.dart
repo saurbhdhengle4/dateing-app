@@ -78,37 +78,45 @@ class ChatDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
-                  const SizedBox(width: 6),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                    decoration: BoxDecoration(color: AppColors.navy, borderRadius: BorderRadius.circular(6)),
-                    child: const Text(
-                      'PLATINUM',
-                      style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.4),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        name,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 2),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 7,
-                    height: 7,
-                    decoration: const BoxDecoration(color: AppColors.online, shape: BoxShape.circle),
-                  ),
-                  const SizedBox(width: 4),
-                  const Text('Online', style: TextStyle(fontSize: 11, color: AppColors.online, fontWeight: FontWeight.w500)),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(color: AppColors.navy, borderRadius: BorderRadius.circular(6)),
+                      child: const Text(
+                        'PLATINUM',
+                        style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.4),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 7,
+                      height: 7,
+                      decoration: const BoxDecoration(color: AppColors.online, shape: BoxShape.circle),
+                    ),
+                    const SizedBox(width: 4),
+                    const Text('Online', style: TextStyle(fontSize: 11, color: AppColors.online, fontWeight: FontWeight.w500)),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

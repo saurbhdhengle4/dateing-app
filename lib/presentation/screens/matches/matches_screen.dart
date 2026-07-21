@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
-/// Static "Admirers" grid screen — likes received. UI only per spec.
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({super.key});
 
@@ -25,11 +24,19 @@ class MatchesScreen extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               Container(color: AppColors.navySoft),
-              const Center(child: Icon(Icons.favorite, color: Colors.white24, size: 36)),
+              const Center(
+                child: Icon(Icons.favorite, color: Colors.white24, size: 36),
+              ),
               Positioned(
                 left: 10,
                 bottom: 10,
-                child: Text('User ${i + 1}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                child: Text(
+                  'User ${i + 1}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
